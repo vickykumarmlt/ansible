@@ -1,0 +1,13 @@
+home1 ansible_host=13.233.126.102 ansible_connection=ssh ansible_port=22 ansible_user=ubuntu ansible_python_interpreter=/usr/bin/python3 ansible_ssh_private_key_file=/home/vikramkumar/Desktop/ansible/Mum.pem
+
+home2 ansible_host=13.126.181.12 ansible_connection=ssh ansible_port=22 ansible_user=ubuntu ansible_python_interpreter=/usr/bin/python3 ansible_ssh_private_key_file=/home/vikramkumar/Desktop/ansible/Mum.pem
+
+#localhost ansible_connection=local ansible_python_interpreter="/usr/bin/env python"
+
+[home]
+home1
+home2
+
+[test:children]
+#home
+#office

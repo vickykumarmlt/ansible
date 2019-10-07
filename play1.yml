@@ -1,0 +1,35 @@
+---
+- hosts : home1
+  become : yes
+  tasks:
+   - debug:
+          msg: "before we run our role"
+
+
+   - name :  "Checking the apache has latest version"
+     apt:
+           name: apache2
+           state: latest
+
+   - name : "checking apache running"
+     service:
+           name: apache2
+           state: started 
+           #     listen: "restart web services"
+           #command: echo "this task will restart the web services" 
+
+- hosts: home2
+  become: yes
+  tasks:
+          - name: "Installation of mysql daemon"
+            apt: 
+                name: mysql-server
+                state: latest
+          - name: "checking mysql is running"
+            service: 
+                      name: mysql
+                      state: started  
+            #notify:
+             #   - start mysql     
+ 
+ 

@@ -1,0 +1,43 @@
+---
+- hosts : home1
+  become : yes
+  tasks:
+   - name :  "Checking the apache has latest version"
+     apt:
+           name: apache2
+           state: latest
+     notify:
+         - start apache
+
+           #- name : "checking apache running"
+     #service:
+             # name: apache2
+           #           state: started 
+
+- hosts: home2
+  become: yes
+  tasks:
+          - name: "Installation of mysql daemon"
+            apt: 
+                name: mysql-server
+                state: latest
+                # - name: "checking mysql is running"
+                #service: 
+            #                name: mysql
+            #state: started  
+            notify:
+                - start mysql     
+ 
+ 
+  handlers:
+          - name: start apache
+            service:
+                    name: apache2
+                    state: restarted
+                    become: yes
+
+          - name: start mysql
+            service: 
+                name: mysql
+                state: started
+                become: yes

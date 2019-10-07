@@ -1,0 +1,5 @@
+- name: "Installation of mysql daemon"
+            apt: 
+                name: mysql-server
+                state: latest
+

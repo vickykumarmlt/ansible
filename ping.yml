@@ -1,0 +1,12 @@
+---
+- hosts: home1
+  tasks: 
+        - name: "Test connection"
+          ping:
+          remote_user: ubuntu
+
+- hosts: home2
+  tasks:
+        - name: "Test connection"
+          ping:
+          remote_user: ubuntu

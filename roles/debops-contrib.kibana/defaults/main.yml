@@ -1,0 +1,136 @@
+---
+# .. vim: foldmarker=[[[,]]]:foldmethod=marker
+
+# debops-contrib.kibana default variables [[[
+# ===========================================
+
+# .. contents:: Sections
+#    :local:
+#
+# .. include:: includes/all.rst
+
+
+# Basic configuration [[[
+# -----------------------
+
+# .. envvar:: kibana__version [[[
+#
+# Kibana software release version. Check (and/or extend)
+# :envvar:`kibana__apt_repo_map` for the list of supported versions.
+kibana__version: '5.x'
+                                                                   # ]]]
+                                                                   # ]]]
+# Packages and installation [[[
+# -----------------------------
+
+# .. envvar:: kibana__base_packages [[[
+#
+# List of base packages to install.
+kibana__base_packages:
+  - 'kibana'
+
+                                                                   # ]]]
+# .. envvar:: kibana__deploy_state [[[
+#
+# What is the desired state which this role should achieve? Possible options:
+#
+# ``present``
+#   Default. Ensure that Kibana is installed and configured as requested.
+#
+# ``latest``
+#   Ensure that the Kibana packages are updated if newer versions are avilable
+#   in the APT repository.
+#
+# ``absent``
+#   Ensure that Kibana is uninstalled and it's configuration is removed.
+#
+kibana__deploy_state: 'present'
+
+                                                                   # ]]]
+# .. envvar:: kibana__apt_repo_map [[[
+#
+# Dictionary to lookup upstream repository URLs for a corresponding release.
+kibana__apt_repo_map:
+  '4.6': 'https://packages.elastic.co/kibana/{{ kibana__version }}/debian'
+  '5.x': 'https://artifacts.elastic.co/packages/{{ kibana__version }}/apt'
+
+                                                                   # ]]]
+# .. envvar:: kibana__apt_repo_source [[[
+#
+# APT ``source.list`` configuration string of the Kibana ``.deb.`` repository.
+# Set to ``False`` if the repository providing the Kibana packages is
+# configured through other means.
+kibana__apt_repo_source: 'deb {{ kibana__apt_repo_map[kibana__version] }} stable main'
+
+                                                                   # ]]]
+# .. envvar:: kibana__apt_repo_key_id [[[
+#
+# Package signing GPG public key fingerprint. Set to ``False`` if the key is
+# provided through other means or the packages are not signed.
+kibana__apt_repo_key_id: '4609 5ACC 8548 582C 1A26 99A9 D27D 666C D88E 42B4'
+
+                                                                   # ]]]
+# .. envvar:: kibana__config_path_map [[[
+#
+# Dictionary to lookup the the configuration directory for a corresponding
+# release.
+kibana__config_path_map:
+  '4.6': '/opt/kibana/config'
+  '5.x': '/etc/kibana'
+
+                                                                   # ]]]
+# .. envvar:: kibana__config_path [[[
+#
+# Path for storing configuration file.
+kibana__config_path: '{{ kibana__config_path_map[kibana__version] }}'
+                                                                   # ]]]
+                                                                   # ]]]
+# Network configuration [[[
+# -------------------------
+
+# .. envvar:: kibana__bind [[[
+#
+# IP address or hostname where the Kibana service will listen for connections.
+kibana__bind: '0.0.0.0'
+
+                                                                   # ]]]
+# .. envvar:: kibana__port [[[
+#
+# Network port of the Kibana service.
+kibana__port: '5601'
+
+                                                                   # ]]]
+# .. envvar:: kibana__allow [[[
+#
+# List of IP addresses or CIDR subnets which will be allowed via
+# :command:`ip(6)tables` to connect to the Kibana service. If it's
+# empty, all remote connections are allowed.
+kibana__allow: []
+
+                                                                   # ]]]
+# .. envvar:: kibana__ferm__dependent_rules [[[
+#
+# Configuration for ``debops.ferm`` Ansible rule.
+kibana__ferm__dependent_rules:
+  - type: 'accept'
+    dport: [ '{{ kibana__port }}' ]
+    saddr: '{{ kibana__allow }}'
+    accept_any: True
+    weight: '50'
+    role: 'debops-contrib.kibana'
+    rule_state: '{{ "present"
+                    if kibana__deploy_state|d("present") != "absent"
+                    else "absent" }}'
+                                                                   # ]]]
+                                                                   # ]]]
+# Service configuration [[[
+# -------------------------
+
+# .. envvar:: kibana__service_configuration [[[
+#
+# Configuration values which should be set in :file:`kibana.yml`. For more
+# information see :ref:`kibana__ref_service_configuration`.
+kibana__service_configuration: {}
+                                                                   # ]]]
+                                                                   # ]]]
+                                                                   # ]]]
