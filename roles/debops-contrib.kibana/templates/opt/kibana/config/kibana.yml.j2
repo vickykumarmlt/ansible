@@ -1,5 +1,0 @@
-{% set _ = (kibana__service_configuration|d({})).update({'server.port': kibana__port}) %}
-{% set _ = kibana__service_configuration.update({'server.host': kibana__bind}) %}
-# {{ ansible_managed }}
-
-{{ kibana__service_configuration | to_nice_yaml }}
