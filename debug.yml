@@ -2,4 +2,5 @@
 - name: "Jinja template testing"
   hosts: all
   tasks:
-          - debug: var=ansible_facts
+          - debug: var=ansible_facts['distribution']
+          - debug: var=ansible_facts['os_family']

@@ -1,0 +1,9 @@
+---
+         - name: "Creating file on debain flavour server"
+           file: 
+                path: /home/ubuntu/ubuntu_dir
+                state: directory
+                mode: '0777'
+           #when: ansible_facts['os_family'] == "debian"
+           when: ansible_distribution == "Ubuntu"
+

@@ -1,9 +1,14 @@
-
+---
 # roles/example/tasks/main.yml
-hosts: all
-tasks:
-        #name: "added in 2.4, previously you used include"
-      - include: redhat.yml
-        #   when: ansible_facts['os_family']|lower == 'redhat'
-      - include: debian1.yml
-        #when: ansible_facts['os_family']|lower == 'debian'
+ - name: "Tasks" 
+   hosts: all
+   tasks:
+         - name: "added in 2.4, previously you used include"
+           import_tasks: redhat.yml
+                #when: ansible_facts['os_family']|lower == 'redhat'
+           when: ansible_distribution == "Amazon"
+      
+         - name: "ubuntu"  
+           import_tasks: debain.yml
+                #when: ansible_facts['os_family']|lower == 'debian'
+           when: ansible_distribution == "Ubuntu"

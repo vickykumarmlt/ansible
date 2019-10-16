@@ -1,0 +1,11 @@
+---
+
+    - name: "Creating directory in redhat flavour servers"
+      file:
+           path: /home/ec2-user/centos_dir
+           state: directory
+           mode: '0777'
+           #when: ansible_facts['os_family'] == "centos"
+      when: ansible_distribution == 'Amazon' or ansible_distribution == 'Red Hat Enterprise Linux'
+
+
