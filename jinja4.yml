@@ -1,0 +1,29 @@
+---
+- name: "Jinja template testing"
+  hosts: all
+  tasks:
+
+  - shell: cat /home/ubuntu/multidoc-file.yaml
+    register: result
+    ignore_errors: True
+
+  - debug:
+      msg: "it failed"
+    when: result is failed
+
+  # in most cases you'll want a handler, but if you want to do something right now, this is nice
+  - debug:
+      msg: "it changed"
+    when: result is changed
+
+  - debug:
+      msg: "it succeeded in Ansible >= 2.1"
+    when: result is succeeded
+
+  - debug:
+      msg: "it succeeded"
+    when: result is success
+
+  - debug:
+      msg: "it was skipped"
+    when: result is skipped

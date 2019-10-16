@@ -1,5 +1,0 @@
-# roles/example/tasks/redhat.yml
-- name : "installing httpd daemon"
-  yum:
-    name: "httpd"
-    state: present

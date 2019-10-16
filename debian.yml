@@ -1,5 +1,0 @@
-# roles/example/tasks/debian.yml
-- name: "installing apache2 daemon"
-  apt:
-    name: "apache2"
-    state: present

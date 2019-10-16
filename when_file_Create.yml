@@ -1,0 +1,17 @@
+---
+- name: "When condition testing"
+  hosts: all
+  tasks:
+         - name: "Crating a file in Amazon Linux"
+           file:
+                    path: /home/ec2-user/centos_dir/amazon.txt
+                    state: touch
+                    mode: '0777'
+           when: ansible_distribution == 'Amazon' or ansible_distribution == 'Red Hat Enterprise Linux'
+
+         - name: "Creating file in ubuntu_dir directory"
+           file:
+                path: /home/ubuntu/ubuntu_dir/ubuntu.txt
+                state: touch
+                mode: '0777'
+           when: ansible_distribution == "Ubuntu"

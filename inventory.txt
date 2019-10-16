@@ -1,12 +1,17 @@
-home1 ansible_host=13.233.126.102 ansible_connection=ssh ansible_port=22 ansible_user=ubuntu ansible_python_interpreter=/usr/bin/python3 ansible_ssh_private_key_file=/home/vikramkumar/Desktop/ansible/Mum.pem
+home1 ansible_host=13.234.30.210 ansible_connection=ssh ansible_port=22 ansible_user=ubuntu ansible_python_interpreter=/usr/bin/python3 ansible_ssh_private_key_file=/home/vikramkumar/Desktop/LearningStuff/ansible/Mum.pem
 
-home2 ansible_host=13.126.181.12 ansible_connection=ssh ansible_port=22 ansible_user=ubuntu ansible_python_interpreter=/usr/bin/python3 ansible_ssh_private_key_file=/home/vikramkumar/Desktop/ansible/Mum.pem
+#home2 ansible_host=13.126.181.12 ansible_connection=ssh ansible_port=22 ansible_user=ubuntu ansible_python_interpreter=/usr/bin/python3 ansible_ssh_private_key_file=/home/vikramkumar/Desktop/LearningStuff/ansible/Mum.pem
+
+redhat1 ansible_host=13.233.147.142 ansible_connection=ssh ansible_port=22 ansible_user=ec2-user ansible_python_interpreter=/usr/bin/python  ansible_ssh_private_key_file=/home/vikramkumar/Desktop/LearningStuff/ansible/Mum.pem
 
 #localhost ansible_connection=local ansible_python_interpreter="/usr/bin/env python"
 
-[home]
+[ubuntu]
 home1
-home2
+#home2
+
+[redhat]
+redhat1
 
 [test:children]
 #home
