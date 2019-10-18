@@ -1,0 +1,9 @@
+---
+- name: "Register in loop"
+  hosts: all
+  tasks:
+          - shell: /bin/bash
+            register: result
+            until: result.stdout.find("all systems go") != -1
+            retries: 5
+            delay: 10

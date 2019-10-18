@@ -1,0 +1,18 @@
+---
+- name: "Register in loop"
+  hosts: all
+  tasks:
+          - name: with_indexed_items
+            debug:
+                msg: "{{ item.0 }} - {{ item.1 }}"
+            loop: "{{['one','boo']}}"
+
+            with_indexed_items: "{{ items }}"
+
+          - name: with_items -> loop
+            debug:
+                  msg: "{{ item }}"
+                  #loop: "{{ ['one','boo']|flatten(levels=1) }}"
+            loop: "{{ ['one','boo'] }}"
+            loop_control:
+                index_var: index

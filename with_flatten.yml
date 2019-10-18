@@ -1,0 +1,14 @@
+---
+- name: "Register in loop"
+  hosts: all
+  tasks:
+          - name: with_flattened
+            debug:
+                msg: "{{ item }}"
+            loop: "{{['one','boo']}}"
+            with_flattened: "{{ items }}"
+
+          - name: with_flattened -> loop
+            debug:
+                msg: "{{ item }}"
+            loop: "{{ ['one','two'] |flatten }}"
